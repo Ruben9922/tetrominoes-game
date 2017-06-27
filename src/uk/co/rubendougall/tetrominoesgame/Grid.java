@@ -44,7 +44,15 @@ class Grid {
             for (int j = 0; j < GRID_HEIGHT; j++) {
                 PShape rectangle = parent.createShape(PConstants.RECT, i * CELL_WIDTH, j * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
                 rectangle.setStroke(false);
-                rectangle.setFill(false);
+
+                // Highlight this rectangle if mouse hovering over this rectangle
+                if (parent.mouseX >= (i) * CELL_WIDTH && parent.mouseX < (i + 1) * CELL_WIDTH
+                        && parent.mouseY >= (j) * CELL_HEIGHT && parent.mouseY < (j + 1) * CELL_HEIGHT) {
+                    rectangle.setFill(parent.color(127));
+                } else {
+                    rectangle.setFill(false);
+                }
+
                 shape.addChild(rectangle);
             }
         }
