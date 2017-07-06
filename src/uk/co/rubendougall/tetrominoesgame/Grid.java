@@ -1,5 +1,6 @@
 package uk.co.rubendougall.tetrominoesgame;
 
+import org.jetbrains.annotations.Contract;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PShape;
@@ -46,8 +47,7 @@ class Grid {
                 rectangle.setStroke(false);
 
                 // Highlight this rectangle if mouse hovering over this rectangle
-                if (parent.mouseX >= (i) * CELL_WIDTH && parent.mouseX < (i + 1) * CELL_WIDTH
-                        && parent.mouseY >= (j) * CELL_HEIGHT && parent.mouseY < (j + 1) * CELL_HEIGHT) {
+                if (isMouseInCell(i, j)) {
                     rectangle.setFill(parent.color(127));
                 } else {
                     rectangle.setFill(false);
@@ -56,6 +56,14 @@ class Grid {
                 shape.addChild(rectangle);
             }
         }
+    }
+
+    @Contract(pure = true)
+    private boolean isMouseInCell(int column, int row) {
+        return parent.mouseX >= (column) * CELL_WIDTH && parent.mouseX < (column + 1) * CELL_WIDTH
+                && parent.mouseY >= (row) * CELL_HEIGHT && parent.mouseY < (row + 1) * CELL_HEIGHT
+                && parent.mouseX != 0 && parent.mouseX != parent.width - 1 // Might change later
+                && parent.mouseY != 0 && parent.mouseY != parent.height - 1;
     }
 
     public void draw() {
