@@ -43,17 +43,17 @@ class Grid {
 
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
-                PShape rectangle = parent.createShape(PConstants.RECT, i * CELL_WIDTH, j * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
-                rectangle.setStroke(false);
+                PShape cell = parent.createShape(PConstants.RECT, i * CELL_WIDTH, j * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+                cell.setStroke(false);
 
-                // Highlight this rectangle if mouse hovering over this rectangle
+                // Highlight this cell if mouse hovering over this cell
                 if (isMouseInCell(i, j)) {
-                    rectangle.setFill(parent.color(127));
+                    cell.setFill(parent.color(127));
                 } else {
-                    rectangle.setFill(false);
+                    cell.setFill(false);
                 }
 
-                shape.addChild(rectangle);
+                shape.addChild(cell);
             }
         }
     }
