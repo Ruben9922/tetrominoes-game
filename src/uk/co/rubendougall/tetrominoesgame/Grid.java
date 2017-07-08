@@ -21,7 +21,7 @@ class Grid {
         cellWidth = (parent.width - (horizontalPadding * 2)) / gridWidth;
         cellHeight = (parent.height - (verticalPadding * 2)) / gridHeight;
 
-        updateShape();
+        update();
     }
 
     public int getGridWidth() {
@@ -40,7 +40,7 @@ class Grid {
         return cellHeight;
     }
 
-    public void updateShape() {
+    public void update() {
         shape = parent.createShape(PConstants.GROUP);
 
         shape.translate(horizontalPadding, verticalPadding);

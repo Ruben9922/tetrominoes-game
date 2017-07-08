@@ -27,7 +27,7 @@ public class TetrominoesGame extends PApplet {
     public void draw() {
         background(50);
 
-        grid.updateShape();
+        grid.update();
         grid.draw();
     }
 }
