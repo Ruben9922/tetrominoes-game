@@ -11,13 +11,15 @@ class Grid {
     private final int GRID_HEIGHT = 10;
     private final int CELL_WIDTH;
     private final int CELL_HEIGHT;
+    private final int horizontalPadding = 20;
+    private final int verticalPadding = 20;
     private PShape shape;
 
     public Grid(PApplet parent) {
         this.parent = parent;
 
-        CELL_WIDTH = parent.width / GRID_WIDTH;
-        CELL_HEIGHT = parent.height / GRID_HEIGHT;
+        CELL_WIDTH = (parent.width - (horizontalPadding * 2)) / GRID_WIDTH;
+        CELL_HEIGHT = (parent.height - (verticalPadding * 2)) / GRID_HEIGHT;
 
         updateShape();
     }
@@ -41,6 +43,8 @@ class Grid {
     public void updateShape() {
         shape = parent.createShape(PConstants.GROUP);
 
+        shape.translate(horizontalPadding, verticalPadding);
+
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
                 PShape cell = parent.createShape(PConstants.RECT, i * CELL_WIDTH, j * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
@@ -60,10 +64,10 @@ class Grid {
 
     @Contract(pure = true)
     private boolean isMouseInCell(int column, int row) {
-        return parent.mouseX >= (column) * CELL_WIDTH && parent.mouseX < (column + 1) * CELL_WIDTH
-                && parent.mouseY >= (row) * CELL_HEIGHT && parent.mouseY < (row + 1) * CELL_HEIGHT
-                && parent.mouseX != 0 && parent.mouseX != parent.width - 1 // Might change later
-                && parent.mouseY != 0 && parent.mouseY != parent.height - 1;
+        return parent.mouseX >= (column * CELL_WIDTH) + horizontalPadding
+                && parent.mouseX < ((column + 1) * CELL_WIDTH) + horizontalPadding
+                && parent.mouseY >= (row * CELL_HEIGHT) + verticalPadding
+                && parent.mouseY < ((row + 1) * CELL_HEIGHT) + verticalPadding;
     }
 
     public void draw() {
