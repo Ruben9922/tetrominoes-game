@@ -7,10 +7,10 @@ import processing.core.PShape;
 
 class Grid {
     private final PApplet parent;
-    private final int GRID_WIDTH = 5;
-    private final int GRID_HEIGHT = 10;
-    private final int CELL_WIDTH;
-    private final int CELL_HEIGHT;
+    private final int gridWidth = 5;
+    private final int gridHeight = 10;
+    private final int cellWidth;
+    private final int cellHeight;
     private final int horizontalPadding = 20;
     private final int verticalPadding = 20;
     private PShape shape;
@@ -18,26 +18,26 @@ class Grid {
     public Grid(PApplet parent) {
         this.parent = parent;
 
-        CELL_WIDTH = (parent.width - (horizontalPadding * 2)) / GRID_WIDTH;
-        CELL_HEIGHT = (parent.height - (verticalPadding * 2)) / GRID_HEIGHT;
+        cellWidth = (parent.width - (horizontalPadding * 2)) / gridWidth;
+        cellHeight = (parent.height - (verticalPadding * 2)) / gridHeight;
 
         updateShape();
     }
 
     public int getGridWidth() {
-        return GRID_WIDTH;
+        return gridWidth;
     }
 
     public int getGridHeight() {
-        return GRID_HEIGHT;
+        return gridHeight;
     }
 
     public int getCellWidth() {
-        return CELL_WIDTH;
+        return cellWidth;
     }
 
     public int getCellHeight() {
-        return CELL_HEIGHT;
+        return cellHeight;
     }
 
     public void updateShape() {
@@ -45,9 +45,9 @@ class Grid {
 
         shape.translate(horizontalPadding, verticalPadding);
 
-        for (int i = 0; i < GRID_WIDTH; i++) {
-            for (int j = 0; j < GRID_HEIGHT; j++) {
-                PShape cell = parent.createShape(PConstants.RECT, i * CELL_WIDTH, j * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridHeight; j++) {
+                PShape cell = parent.createShape(PConstants.RECT, i * cellWidth, j * cellHeight, cellWidth, cellHeight);
                 cell.setStroke(false);
 
                 // Highlight this cell if mouse hovering over this cell
@@ -64,10 +64,10 @@ class Grid {
 
     @Contract(pure = true)
     private boolean isMouseInCell(int column, int row) {
-        return parent.mouseX >= (column * CELL_WIDTH) + horizontalPadding
-                && parent.mouseX < ((column + 1) * CELL_WIDTH) + horizontalPadding
-                && parent.mouseY >= (row * CELL_HEIGHT) + verticalPadding
-                && parent.mouseY < ((row + 1) * CELL_HEIGHT) + verticalPadding;
+        return parent.mouseX >= (column * cellWidth) + horizontalPadding
+                && parent.mouseX < ((column + 1) * cellWidth) + horizontalPadding
+                && parent.mouseY >= (row * cellHeight) + verticalPadding
+                && parent.mouseY < ((row + 1) * cellHeight) + verticalPadding;
     }
 
     public void draw() {
