@@ -14,12 +14,15 @@ class Grid {
     private final int horizontalPadding = 20;
     private final int verticalPadding = 20;
     private PShape shape;
+    private boolean[][] states;
 
     public Grid(PApplet parent) {
         this.parent = parent;
 
         cellWidth = (parent.width - (horizontalPadding * 2)) / gridWidth;
         cellHeight = (parent.height - (verticalPadding * 2)) / gridHeight;
+
+        states = new boolean[cellWidth][cellHeight];
 
         update();
     }
@@ -53,6 +56,8 @@ class Grid {
                 // Highlight this cell if mouse hovering over this cell
                 if (isMouseInCell(i, j)) {
                     cell.setFill(parent.color(127));
+                } else if (states[i][j]) {
+                    cell.setFill(parent.color(255));
                 } else {
                     cell.setFill(false);
                 }
@@ -74,5 +79,9 @@ class Grid {
         parent.pushMatrix();
         parent.shape(shape);
         parent.popMatrix();
+    }
+
+    public void setState(int x, int y, boolean state) {
+        states[x][y] = state;
     }
 }
