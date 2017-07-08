@@ -3,7 +3,7 @@ package uk.co.rubendougall.tetrominoesgame;
 import processing.core.PApplet;
 
 public class TetrominoesGame extends PApplet {
-    private static Grid grid;
+    private Grid grid;
 
     public static void main(String[] args) {
         PApplet.main("uk.co.rubendougall.tetrominoesgame.TetrominoesGame");
