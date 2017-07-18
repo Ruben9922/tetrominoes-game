@@ -31,8 +31,11 @@ class Game {
         // Shift falling shapeTypes
         shiftFallingShapes();
 
-        // "Draw" all shapes to grid
+        // Redraw falling shapes now that they have been shifted down
         setShapes(fallingShapes, true);
+
+        // Draw stationary shapes since shapes may have been moved from falling shapes list to stationary shapes list
+        // and therefore have been cleared but not redrawn
         setShapes(stationaryShapes, true);
 
         // Add shape to queue if max queue size not reached
