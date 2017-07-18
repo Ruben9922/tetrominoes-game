@@ -19,7 +19,7 @@ class Game {
     private List<Shape> fallingShapes = new LinkedList<>();
     private List<Shape> stationaryShapes = new LinkedList<>();
 
-    public Game(Grid grid) {
+    Game(Grid grid) {
         this.grid = grid;
     }
 
