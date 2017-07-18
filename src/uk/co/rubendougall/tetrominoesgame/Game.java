@@ -24,6 +24,16 @@ class Game {
     }
 
     void update() {
+        // Clear falling shapes from previous update
+        setShapes(fallingShapes, false);
+
+        // Shift falling shapeTypes
+        shiftFallingShapes();
+
+        // "Draw" all shapes to grid
+        setShapes(fallingShapes, true);
+        setShapes(stationaryShapes, true);
+
         // Add shape to queue at specified interval
         final int maxShapeQueueSize = 3;
         if (shapeQueue.size() < maxShapeQueueSize) {
@@ -34,16 +44,6 @@ class Game {
         if (fallingShapes.size() < maxFallingShapeCount) {
             removeFromQueue();
         }
-
-        // Clear falling shapes from previous update
-        setShapes(fallingShapes, false);
-
-        // Shift falling shapeTypes
-        shiftFallingShapes();
-
-        // "Draw" all shapes to grid
-        setShapes(fallingShapes, true);
-        setShapes(stationaryShapes, true);
     }
 
     private void addToQueue() {
@@ -51,12 +51,12 @@ class Game {
         ShapeType shapeType = shapeTypes[index];
         shapeQueue.offer(shapeType);
 
-        System.out.println(shapeQueue.size());
+        System.out.println("shapeQueue.size() = " + shapeQueue.size());
     }
 
     private void removeFromQueue() {
         // Remove shape from queue and start displaying it
-        System.out.println(shapeQueue.size());
+        System.out.println("shapeQueue.size() = " + shapeQueue.size());
 
         ShapeType shapeType = shapeQueue.poll();
         if (shapeType != null) {
