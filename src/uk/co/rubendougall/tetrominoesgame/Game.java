@@ -1,6 +1,7 @@
 package uk.co.rubendougall.tetrominoesgame;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -66,8 +67,18 @@ class Game {
     }
 
     private void shiftFallingShapes() {
-        for (Shape shape : fallingShapes) {
-            shape.shiftDown();
+        Iterator<Shape> iterator = fallingShapes.iterator();
+        while (iterator.hasNext()) {
+            Shape shape = iterator.next();
+
+            if (shape.isClearUnderneath()) {
+                // If clear underneath this shape, shift shape down
+                shape.shiftDown();
+            } else {
+                // If not clear, shape must stop falling, so move to stationary shapes list
+                iterator.remove();
+                stationaryShapes.add(shape);
+            }
         }
     }
 
@@ -130,12 +141,10 @@ class Game {
         }
 
         void shiftDown() {
-            if (isClearUnderneath()) {
-                y++;
-            }
+            y++;
         }
 
-        private boolean isClearUnderneath() {
+        boolean isClearUnderneath() {
             // TODO: Implement properly
             return y + shapeType.getHeight() < grid.getGridHeight();
         }
