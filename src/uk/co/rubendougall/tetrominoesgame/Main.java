@@ -2,13 +2,13 @@ package uk.co.rubendougall.tetrominoesgame;
 
 import processing.core.PApplet;
 
-public class TetrominoesGame extends PApplet {
+public class Main extends PApplet {
     private Grid grid;
     private Game game;
     private int timeSinceGameUpdated = 0;
 
     public static void main(String[] args) {
-        PApplet.main("uk.co.rubendougall.tetrominoesgame.TetrominoesGame");
+        PApplet.main("uk.co.rubendougall.tetrominoesgame.Main");
     }
 
     @Override
