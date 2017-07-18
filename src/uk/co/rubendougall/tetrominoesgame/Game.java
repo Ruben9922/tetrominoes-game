@@ -129,7 +129,7 @@ class Game {
 
         private boolean isClearUnderneath() {
             // TODO: Implement properly
-            return true;
+            return y + shapeType.calculateHeight() < grid.getGridHeight();
         }
     }
 }
