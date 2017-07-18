@@ -35,12 +35,13 @@ class Game {
         setShapes(fallingShapes, true);
         setShapes(stationaryShapes, true);
 
-        // Add shape to queue at specified interval
+        // Add shape to queue if max queue size not reached
         final int maxShapeQueueSize = 3;
         if (shapeQueue.size() < maxShapeQueueSize) {
             addToQueue();
         }
 
+        // Remove shape from queue, ready to display on next update, if max number of falling shapes not reached
         final int maxFallingShapeCount = 1;
         if (fallingShapes.size() < maxFallingShapeCount) {
             removeFromQueue();
@@ -56,7 +57,6 @@ class Game {
     }
 
     private void removeFromQueue() {
-        // Remove shape from queue and start displaying it
         ShapeType shapeType = shapeQueue.poll();
         if (shapeType != null) {
             Shape shape = new Shape(shapeType);
@@ -75,7 +75,8 @@ class Game {
                 // If clear underneath this shape, shift shape down
                 shape.shift();
             } else {
-                // If not clear, shape must stop falling, so move to stationary shapes list
+                // If not clear, shape must stop falling, so remove from falling shapes list and add to stationary
+                // shapes list
                 iterator.remove();
                 stationaryShapes.add(shape);
             }
@@ -112,7 +113,7 @@ class Game {
                     .max()
                     .orElse(0);
 
-            // Calculate height
+            // Calculate height; assumes rows are non-empty
             this.height = rows.length;
         }
 
