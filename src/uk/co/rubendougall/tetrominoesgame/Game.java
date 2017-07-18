@@ -89,20 +89,28 @@ class Game {
 
     static class ShapeType {
         private int[][] rows;
+        private int width; // Store width and height as fields as they can't change
+        private int height;
 
         public ShapeType(int[][] rows) {
             this.rows = rows;
-        }
 
-        public int calculateWidth() {
-            return Arrays.stream(rows)
+            // Calculate width by finding length of longest row
+            this.width = Arrays.stream(rows)
                     .mapToInt(row -> row.length)
                     .max()
                     .orElse(0);
+
+            // Calculate height
+            this.height = rows.length;
         }
 
-        public int calculateHeight() {
-            return rows.length;
+        public int getWidth() {
+            return width;
+        }
+
+        public int getHeight() {
+            return height;
         }
     }
 
@@ -115,8 +123,8 @@ class Game {
             // Create new Shape with default values
             // Default value for x depends on width of grid, hence requiring it as a parameter
             this.shapeType = shapeType;
-            this.x = Math.max(0, (int) Math.floor((grid.getGridWidth() - shapeType.calculateWidth()) / 2));
-            this.y = Math.min(0, 0 - shapeType.calculateHeight());
+            this.x = Math.max(0, (int) Math.floor((grid.getGridWidth() - shapeType.getWidth()) / 2));
+            this.y = Math.min(0, 0 - shapeType.getHeight());
             System.out.println("x = " + x);
             System.out.println("y = " + y);
         }
@@ -129,7 +137,7 @@ class Game {
 
         private boolean isClearUnderneath() {
             // TODO: Implement properly
-            return y + shapeType.calculateHeight() < grid.getGridHeight();
+            return y + shapeType.getHeight() < grid.getGridHeight();
         }
     }
 }
