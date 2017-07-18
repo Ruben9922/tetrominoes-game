@@ -4,6 +4,8 @@ import processing.core.PApplet;
 
 public class TetrominoesGame extends PApplet {
     private Grid grid;
+    private Game game;
+    private int timeSinceGameUpdated = 0;
 
     public static void main(String[] args) {
         PApplet.main("uk.co.rubendougall.tetrominoesgame.TetrominoesGame");
@@ -17,6 +19,7 @@ public class TetrominoesGame extends PApplet {
     @Override
     public void setup() {
         grid = new Grid(this);
+        game = new Game(grid);
 
         if (surface != null) {
             surface.setResizable(false); // TODO: Still need to disable maximising properly
@@ -26,6 +29,12 @@ public class TetrominoesGame extends PApplet {
     @Override
     public void draw() {
         background(50);
+
+        final int updateGameInterval = 50;
+        if (timeSinceGameUpdated == 0) {
+            game.update();
+        }
+        timeSinceGameUpdated = (timeSinceGameUpdated + 1) % updateGameInterval;
 
         grid.update();
         grid.draw();
