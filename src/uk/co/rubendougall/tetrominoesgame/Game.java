@@ -23,7 +23,7 @@ class Game {
         this.grid = grid;
     }
 
-    public void update() {
+    void update() {
         // Add shape to queue at specified interval
         final int maxShapeQueueSize = 3;
         if (shapeQueue.size() < maxShapeQueueSize) {
@@ -92,7 +92,7 @@ class Game {
         private int width; // Store width and height as fields as they can't change
         private int height;
 
-        public ShapeType(int[][] rows) {
+        ShapeType(int[][] rows) {
             this.rows = rows;
 
             // Calculate width by finding length of longest row
@@ -105,11 +105,11 @@ class Game {
             this.height = rows.length;
         }
 
-        public int getWidth() {
+        int getWidth() {
             return width;
         }
 
-        public int getHeight() {
+        int getHeight() {
             return height;
         }
     }
@@ -119,7 +119,7 @@ class Game {
         private int x;
         private int y;
 
-        public Shape(ShapeType shapeType) {
+        Shape(ShapeType shapeType) {
             // Create new Shape with default values
             // Default value for x depends on width of grid, hence requiring it as a parameter
             this.shapeType = shapeType;
@@ -129,7 +129,7 @@ class Game {
             System.out.println("y = " + y);
         }
 
-        public void shiftDown() {
+        void shiftDown() {
             if (isClearUnderneath()) {
                 y++;
             }

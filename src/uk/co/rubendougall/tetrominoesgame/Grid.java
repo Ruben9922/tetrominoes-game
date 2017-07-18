@@ -16,7 +16,7 @@ class Grid {
     private PShape shape;
     private boolean[][] states;
 
-    public Grid(PApplet parent) {
+    Grid(PApplet parent) {
         this.parent = parent;
 
         cellWidth = (parent.width - (horizontalPadding * 2)) / gridWidth;
@@ -27,11 +27,11 @@ class Grid {
         update();
     }
 
-    public int getGridWidth() {
+    int getGridWidth() {
         return gridWidth;
     }
 
-    public int getGridHeight() {
+    int getGridHeight() {
         return gridHeight;
     }
 
@@ -43,7 +43,7 @@ class Grid {
         return cellHeight;
     }
 
-    public void update() {
+    void update() {
         shape = parent.createShape(PConstants.GROUP);
 
         shape.translate(horizontalPadding, verticalPadding);
@@ -75,13 +75,13 @@ class Grid {
                 && parent.mouseY < ((row + 1) * cellHeight) + verticalPadding;
     }
 
-    public void draw() {
+    void draw() {
         parent.pushMatrix();
         parent.shape(shape);
         parent.popMatrix();
     }
 
-    public void setState(int x, int y, boolean state) {
+    void setState(int x, int y, boolean state) {
         states[x][y] = state;
     }
 }
