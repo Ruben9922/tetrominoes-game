@@ -73,7 +73,7 @@ class Game {
 
             if (shape.isClearUnderneath()) {
                 // If clear underneath this shape, shift shape down
-                shape.shiftDown();
+                shape.shift();
             } else {
                 // If not clear, shape must stop falling, so move to stationary shapes list
                 iterator.remove();
@@ -140,7 +140,7 @@ class Game {
             System.out.println("y = " + y);
         }
 
-        void shiftDown() {
+        void shift() {
             y++;
         }
 
