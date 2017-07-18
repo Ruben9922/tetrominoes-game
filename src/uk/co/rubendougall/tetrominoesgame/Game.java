@@ -52,18 +52,18 @@ class Game {
         ShapeType shapeType = shapeTypes[index];
         shapeQueue.offer(shapeType);
 
-        System.out.println("shapeQueue.size() = " + shapeQueue.size());
+        System.out.println("Added: shapeQueue.size() = " + shapeQueue.size());
     }
 
     private void removeFromQueue() {
         // Remove shape from queue and start displaying it
-        System.out.println("shapeQueue.size() = " + shapeQueue.size());
-
         ShapeType shapeType = shapeQueue.poll();
         if (shapeType != null) {
             Shape shape = new Shape(shapeType);
             fallingShapes.add(shape);
         }
+
+        System.out.println("Removed: shapeQueue.size() = " + shapeQueue.size());
     }
 
     private void shiftFallingShapes() {
