@@ -94,7 +94,7 @@ class Game {
                 for (int column : row) {
                     int x = shape.x + column;
                     int y = shape.y + i;
-                    if (x >= 0 && x < grid.getGridWidth() && y >= 0 && y < grid.getGridHeight()) {
+                    if (grid.areCoordsValid(x, y)) {
                         grid.setState(x, y, state);
                     }
                 }
@@ -149,8 +149,28 @@ class Game {
         }
 
         boolean isClearUnderneath() {
-            // TODO: Implement properly
+            return notAtBottom() && noShapesUnderneath();
+        }
+
+        private boolean notAtBottom() {
             return y + shapeType.getHeight() < grid.getGridHeight();
+        }
+
+        private boolean noShapesUnderneath() { // TODO: Need to check for "game over"; currently continues trying to add another shape
+            for (int i = 0; i < shapeType.rows.length; i++) {
+                int[] row = shapeType.rows[i];
+                for (int column : row) {
+                    int x = this.x + column;
+                    int y = this.y + i + 1; // Adding 1 since concerned with the square below
+
+                    // Crucial that this check is done after all falling shapes (incl. this one) are cleared and before
+                    // they're redrawn
+                    if (grid.areCoordsValid(x, y) && grid.getState(x, y)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

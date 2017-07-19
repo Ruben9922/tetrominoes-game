@@ -84,4 +84,12 @@ class Grid {
     void setState(int x, int y, boolean state) {
         states[x][y] = state;
     }
+
+    boolean getState(int x, int y) {
+        return states[x][y];
+    }
+
+    boolean areCoordsValid(int x, int y) {
+        return x >= 0 && x < gridWidth && y >= 0 && y < gridHeight;
+    }
 }
