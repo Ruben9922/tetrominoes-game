@@ -1,4 +1,4 @@
-package sample;
+package uk.co.rubendougall.tetrominoesgame;
 
 import javafx.application.Application;
 import javafx.scene.Group;
