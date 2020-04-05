@@ -1,5 +1,6 @@
 package uk.co.rubendougall.tetrominoesgame;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,7 +21,15 @@ public class Main extends Application {
         Group root = new Group();
         Canvas canvas = new Canvas(600, 800);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        draw(gc);
+
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                draw(gc);
+            }
+        };
+        animationTimer.start();
+
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
