@@ -39,6 +39,6 @@ public class Main extends Application {
         gc.setFill(Color.BLUE);
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(5);
-        gc.strokeLine(0, 0, 600, 800);
+        gc.strokeLine(0, 0, Math.floor(Math.random() * 600), Math.floor(Math.random() * 600));
     }
 }
